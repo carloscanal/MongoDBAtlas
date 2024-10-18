@@ -59,14 +59,13 @@ def main(args):
 
     client = pymongo.MongoClient(uri)
 
-    db = client["test"]
-
-    # db = client.get_default_database()    # da error si no hay DB por defecto en el cluster
+    db = client.iweb    # db = client['iweb']
+                        # db = client.get_default_database()    # da error si no hay DB por defecto en el cluster
     
     # First we'll add a few songs. Nothing is required to create the songs 
     # collection; it is created automatically when we insert.
 
-    songs = db['songs']
+    songs = db.songs   # songs = db['songs']
 
     # Note that the insert method can take either an array or a single dict.
 
