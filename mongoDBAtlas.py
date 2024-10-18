@@ -11,6 +11,22 @@ __author__ = 'mLab'
 
 import sys
 import pymongo
+from environs import Env
+
+### Get database URI from the .env file: 
+
+env = Env()
+env.read_env()  # read .env file, if it exists
+
+uri = env('MONGO_URI')      # establecer la variable de entorno MONGO_URI con la URI de la base de datos
+                            # MongoDB local:
+                            #   MONGO_URI = mongodb://localhost:27017
+                            # MongoDB Atlas:
+                            #   MONGO_URI = mongodb+srv://<USER>:<PASS>@<CLUSTER>.mongodb.net/<DB>?retryWrites=true&w=majority
+                            # MongoDB en Docker
+                            #   MONGO_URI = mongodb://root:example@mongodb:27017
+
+print("MONGO_URI: ",uri)
 
 ### Create seed data
 
@@ -34,14 +50,6 @@ SEED_DATA = [
         'weeksAtOne': 16
     }
 ]
-
-### Standard URI format: 
-
-uri = 'mongodb://localhost:27017/iweb'
-
-# Para MongoDB Atlas
-#
-# uri = 'mongodb+srv://<USER>:<PASS>@cluster0.vodgj.mongodb.net/<DATABASE>?retryWrites=true&w=majority'
 
 ###############################################################################
 # main
